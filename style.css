@@ -121,10 +121,16 @@ body {
     content: "X";
     font-size: 10vw;
     font-weight: bold;
+    color: black;
 }
 
 .o::after {
     content: "O";
     font-size: 10vw;
     font-weight: bold;
+    color: red;
+}
+
+.dim::after {
+    opacity: 0.1;
 }
