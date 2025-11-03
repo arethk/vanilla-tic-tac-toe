@@ -12,6 +12,27 @@ body {
     height: 100vh;
 }
 
+.flex {
+    flex: 1;
+}
+
+.header {
+    background-color: white;
+    display: flex;
+    font-weight: bold;
+}
+
+.header label {
+    margin-top: 2px;
+    margin-right: 5px;
+}
+
+.footer {
+    background-color: white;
+    display: flex;
+    font-weight: bold;
+}
+
 .row {
     display: flex;
     flex-direction: row;
