@@ -7,40 +7,38 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="game-output-wrapper">
-        <div class="header">
+    <div class="container">
+        <div class="header-left">
             <label for="xplayerdd">X Player</label>
             <select id="xplayerdd">
                 <option value="human">Human</option>
                 <option value="cpu">CPU</option>
             </select>
-            <div class="flex"></div>
+        </div>
+        <div class="header-middle"></div>
+        <div class="header-right">
             <label for="oplayerdd">O Player</label>
             <select id="oplayerdd">
                 <option value="human">Human</option>
                 <option value="cpu">CPU</option>
             </select>
         </div>
-        <div class="row">
-            <div class="cell0"></div>
-            <div class="cell1"></div>
-            <div class="cell2"></div>
-        </div>
-        <div class="row">
-            <div class="cell3"></div>
-            <div class="cell4"></div>
-            <div class="cell5"></div>
-        </div>
-        <div class="row">
-            <div class="cell6"></div>
-            <div class="cell7"></div>
-            <div class="cell8"></div>
-        </div>
-        <div class="footer">
+        <div class="cell0"></div>
+        <div class="cell1"></div>
+        <div class="cell2"></div>
+        <div class="cell3"></div>
+        <div class="cell4"></div>
+        <div class="cell5"></div>
+        <div class="cell6"></div>
+        <div class="cell7"></div>
+        <div class="cell8"></div>
+        <div class="footer-left">
             X Wins: <span id="xcount"></span>
-            <div class="flex"></div>
+        </div>
+        <div class="footer-middle">
             Ties: <span id="tiecount"></span>
-            <div class="flex"></div>
+        </div>
+        <div class="footer-right">
             O Wins: <span id="ocount"></span>
         </div>
     </div>
