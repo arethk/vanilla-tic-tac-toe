@@ -9,6 +9,7 @@ class TicTacToe {
         // make the ui selectors handy and setup event listeners
         this.xDropdown = document.querySelector("#xplayerdd");
         this.oDropdown = document.querySelector("#oplayerdd");
+        this.info = document.querySelector(".header-middle");
         this.xCount = document.querySelector("#xcount");
         this.tieCount = document.querySelector("#tiecount");
         this.oCount = document.querySelector("#ocount");
@@ -27,12 +28,14 @@ class TicTacToe {
 
     reset() {
         const self = TicTacToe.instance;
-        self.clearCells();
         self.setCount(self.xCount, 0);
         self.setCount(self.tieCount, 0);
         self.setCount(self.oCount, 0);
-        self.blockUI = self.xDropdown.value === "cpu";
+        self.isXCPU = self.xDropdown.value === "cpu";
+        self.isOCPU = self.oDropdown.value === "cpu";
+        self.blockUI = self.isXCPU === "cpu";
         self.isXTurn = true;
+        self.clearCells();
     }
 
     clearCells() {
@@ -41,6 +44,7 @@ class TicTacToe {
             cell.classList.remove("o");
             cell.classList.remove("dim");
         });
+        this.handleTurnMsg();
     }
 
     isGameOver() {
@@ -138,7 +142,19 @@ class TicTacToe {
         });
 
         if (winner) {
-            this.processWin(winner, winners);
+            this.cells.forEach((cell) => {
+                if (winners.includes(cell) === false) {
+                    cell.classList.add("dim");
+                }
+            });
+
+            if (winner === "x") {
+                this.setCount(this.xCount, this.getCount(this.xCount) + 1);
+                this.setInfoMsg("X Wins!");
+            } else {
+                this.setCount(this.oCount, this.getCount(this.oCount) + 1);
+                this.setInfoMsg("Y Wins!");
+            }
         } else {
             // handle tie
             if (
@@ -153,23 +169,24 @@ class TicTacToe {
                 c8.length == 2
             ) {
                 this.setCount(this.tieCount, this.getCount(this.tieCount) + 1);
+                this.setInfoMsg("Tie!");
+            } else {
+                this.handleTurnMsg();
             }
         }
         this.blockUI = false;
     }
 
-    processWin(winner, winnerCells) {
-        this.cells.forEach((cell) => {
-            if (winnerCells.includes(cell) === false) {
-                cell.classList.add("dim");
-            }
-        });
-
-        if (winner === "x") {
-            this.setCount(this.xCount, this.getCount(this.xCount) + 1);
+    handleTurnMsg() {
+        if (this.isXTurn === true) {
+            this.setInfoMsg("X it's your turn!");
         } else {
-            this.setCount(this.oCount, this.getCount(this.oCount) + 1);
+            this.setInfoMsg("O it's your turn!");
         }
+    }
+
+    setInfoMsg(msg) {
+        this.info.innerHTML = msg;
     }
 
     setCount(element, value) {
