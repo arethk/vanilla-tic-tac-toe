@@ -27,11 +27,7 @@ class TicTacToe {
 
     reset() {
         const self = TicTacToe.instance;
-        self.cells.forEach((cell) => {
-            cell.classList.remove("x");
-            cell.classList.remove("o");
-            cell.classList.remove("dim");
-        });
+        self.clearCells();
         self.setCount(self.xCount, 0);
         self.setCount(self.tieCount, 0);
         self.setCount(self.oCount, 0);
@@ -39,9 +35,35 @@ class TicTacToe {
         self.isXTurn = true;
     }
 
+    clearCells() {
+        this.cells.forEach((cell) => {
+            cell.classList.remove("x");
+            cell.classList.remove("o");
+            cell.classList.remove("dim");
+        });
+    }
+
+    isGameOver() {
+        let cellClickedCount = 0;
+        for (let i = 0; i < this.cells.length; i++) {
+            const cell = this.cells[i];
+            const classes = Array.from(cell.classList);
+            if (classes.includes("dim")) {
+                return true;
+            } else if (classes.includes("x") || classes.includes("o")) {
+                ++cellClickedCount;
+            }
+        }
+        return cellClickedCount === 9;
+    }
+
     handleCellClick(event) {
         const self = TicTacToe.instance;
         if (self.blockUI === true) {
+            return;
+        }
+        if (self.isGameOver() === true) {
+            self.clearCells();
             return;
         }
         const classes = Array.from(event.target.classList);
@@ -131,10 +153,9 @@ class TicTacToe {
                 c8.length == 2
             ) {
                 this.setCount(this.tieCount, this.getCount(this.tieCount) + 1);
-            } else {
-                this.blockUI = false;
             }
         }
+        this.blockUI = false;
     }
 
     processWin(winner, winnerCells) {
