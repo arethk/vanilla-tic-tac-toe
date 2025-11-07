@@ -13,6 +13,7 @@ class TicTacToe {
         this.xCount = document.querySelector("#xcount");
         this.tieCount = document.querySelector("#tiecount");
         this.oCount = document.querySelector("#ocount");
+        this.timerInterval = null;
         this.cells = [];
 
         for (let i = 0; i <= 8; i++) {
@@ -28,23 +29,67 @@ class TicTacToe {
 
     reset() {
         const self = TicTacToe.instance;
+        if (self.timerInterval) {
+            clearTimeout(self.timerInterval);
+        }
+        self.isXCPU = self.xDropdown.value === "cpu";
+        self.isOCPU = self.oDropdown.value === "cpu";
+        self.blockUI = self.isXCPU === true;
+        self.isXTurn = true;
         self.setCount(self.xCount, 0);
         self.setCount(self.tieCount, 0);
         self.setCount(self.oCount, 0);
-        self.isXCPU = self.xDropdown.value === "cpu";
-        self.isOCPU = self.oDropdown.value === "cpu";
-        self.blockUI = self.isXCPU === "cpu";
-        self.isXTurn = true;
         self.clearCells();
     }
 
+    handleCPUTurn() {
+        const self = TicTacToe.instance;
+        if (self.isGameOver() === true) {
+            console.log("Game is over!");
+            return;
+        }
+        const availableCells = [];
+        for (let i = 0; i < self.cells.length; i++) {
+            const cell = self.cells[i];
+            const classes = Array.from(cell.classList);
+            if ((classes.includes("x") || classes.includes("o")) === false) {
+                availableCells.push(cell);
+            }
+        }
+        if (availableCells.length > 0) {
+            self.shuffle(availableCells);
+            const selection = availableCells[0];
+            self.handleSelection(selection);
+        } else {
+            console.log("Nothing available!");
+        }
+    }
+
+    shuffle(array) {
+        if (Array.isArray(array) === false) {
+            throw "Argument must be an array";
+        }
+        let currentIndex = array.length;
+        let randomIndex;
+        while (currentIndex !== 0) {
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex--;
+            [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+        }
+        return array;
+    }
+
     clearCells() {
-        this.cells.forEach((cell) => {
+        const self = TicTacToe.instance;
+        self.handleTurnMsg();
+        self.cells.forEach((cell) => {
             cell.classList.remove("x");
             cell.classList.remove("o");
             cell.classList.remove("dim");
         });
-        this.handleTurnMsg();
+        if ((self.isXTurn === true && self.isXCPU === true) || (self.isXTurn === false && self.isOCPU === true)) {
+            self.handleCPUTurn();
+        }
     }
 
     isGameOver() {
@@ -74,13 +119,16 @@ class TicTacToe {
         if (classes.includes("x") || classes.includes("o")) {
             return;
         }
+        self.handleSelection(event.target);
+    }
 
+    handleSelection(selection) {
+        const self = TicTacToe.instance;
         if (self.isXTurn === true) {
-            event.target.classList.add("x");
+            selection.classList.add("x");
         } else {
-            event.target.classList.add("o");
+            selection.classList.add("o");
         }
-
         self.isXTurn = !self.isXTurn;
         self.processGame();
     }
@@ -153,7 +201,11 @@ class TicTacToe {
                 this.setInfoMsg("X Wins!");
             } else {
                 this.setCount(this.oCount, this.getCount(this.oCount) + 1);
-                this.setInfoMsg("Y Wins!");
+                this.setInfoMsg("O Wins!");
+            }
+            if ((this.isXTurn === true && this.isXCPU === true) || (this.isXTurn === false && this.isOCPU === true)) {
+                this.timerInterval = setTimeout(this.clearCells, 1111);
+                return;
             }
         } else {
             // handle tie
@@ -170,8 +222,23 @@ class TicTacToe {
             ) {
                 this.setCount(this.tieCount, this.getCount(this.tieCount) + 1);
                 this.setInfoMsg("Tie!");
+                if ((this.isXTurn === true && this.isXCPU === true) || (this.isXTurn === false && this.isOCPU === true)) {
+                    this.timerInterval = setTimeout(this.clearCells, 1111);
+                    return;
+                }
             } else {
                 this.handleTurnMsg();
+                if (this.isXTurn === true) {
+                    if (this.isXCPU === true) {
+                        this.timerInterval = setTimeout(this.handleCPUTurn, 777);
+                        return;
+                    }
+                } else {
+                    if (this.isOCPU === true) {
+                        this.timerInterval = setTimeout(this.handleCPUTurn, 777);
+                        return;
+                    }
+                }
             }
         }
         this.blockUI = false;
