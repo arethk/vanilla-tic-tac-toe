@@ -260,7 +260,7 @@ class TicTacToe {
         element.innerHTML = value;
     }
 
-    getCount(element,) {
+    getCount(element) {
         return parseInt(element.innerHTML);
     }
 
