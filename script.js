@@ -50,6 +50,18 @@ class TicTacToe {
         return (cellA.includes("x") && cellB.includes("x")) || (cellA.includes("o") && cellB.includes("o"));
     }
 
+    areCellsWinnerReady(cellA, cellB) {
+        const self = TicTacToe.instance;
+        if (Array.isArray(cellA) === false || Array.isArray(cellB) === false) {
+            throw "Argument must be an array";
+        }
+        if (self.isXTurn) {
+            return cellA.includes("x") && cellB.includes("x");
+        } else {
+            return cellA.includes("o") && cellB.includes("o");
+        }
+    }
+
     handleCPUTurn() {
         const self = TicTacToe.instance;
         if (self.isGameOver() === true) {
@@ -65,7 +77,8 @@ class TicTacToe {
             }
         }
         if (availableCells.length > 0) {
-            const availableMoves = [];
+            const availableBlocks = [];
+            const availableWins = [];
             const c0 = Array.from(self.cells[0].classList);
             const c1 = Array.from(self.cells[1].classList);
             const c2 = Array.from(self.cells[2].classList);
@@ -77,85 +90,184 @@ class TicTacToe {
             const c8 = Array.from(self.cells[8].classList);
             // horizontal checks
             if (availableCells.includes(self.cells[2]) && self.areCellsRipe(c0, c1)) {
-                availableMoves.push(self.cells[2]);
+                if (self.areCellsWinnerReady(c0, c1)) {
+                    availableWins.push(self.cells[2]);
+                } else {
+                    availableBlocks.push(self.cells[2]);
+                }
             }
             if (availableCells.includes(self.cells[5]) && self.areCellsRipe(c3, c4)) {
-                availableMoves.push(self.cells[5]);
+                if (self.areCellsWinnerReady(c3, c4)) {
+                    availableWins.push(self.cells[5]);
+                } else {
+                    availableBlocks.push(self.cells[5]);
+                }
             }
             if (availableCells.includes(self.cells[8]) && self.areCellsRipe(c6, c7)) {
-                availableMoves.push(self.cells[8]);
+                if (self.areCellsWinnerReady(c6, c7)) {
+                    availableWins.push(self.cells[8]);
+                } else {
+                    availableBlocks.push(self.cells[8]);
+                }
             }
             if (availableCells.includes(self.cells[1]) && self.areCellsRipe(c0, c2)) {
-                availableMoves.push(self.cells[1]);
+                if (self.areCellsWinnerReady(c0, c2)) {
+                    availableWins.push(self.cells[1]);
+                } else {
+                    availableBlocks.push(self.cells[1]);
+                }
             }
             if (availableCells.includes(self.cells[4]) && self.areCellsRipe(c3, c5)) {
-                availableMoves.push(self.cells[4]);
+                if (self.areCellsWinnerReady(c3, c5)) {
+                    availableWins.push(self.cells[4]);
+                } else {
+                    availableBlocks.push(self.cells[4]);
+                }
             }
             if (availableCells.includes(self.cells[7]) && self.areCellsRipe(c6, c8)) {
-                availableMoves.push(self.cells[7]);
+                if (self.areCellsWinnerReady(c6, c8)) {
+                    availableWins.push(self.cells[7]);
+                } else {
+                    availableBlocks.push(self.cells[7]);
+                }
             }
             if (availableCells.includes(self.cells[0]) && self.areCellsRipe(c1, c2)) {
-                availableMoves.push(self.cells[0]);
+                if (self.areCellsWinnerReady(c1, c2)) {
+                    availableWins.push(self.cells[0]);
+                } else {
+                    availableBlocks.push(self.cells[0]);
+                }
             }
             if (availableCells.includes(self.cells[3]) && self.areCellsRipe(c4, c5)) {
-                availableMoves.push(self.cells[3]);
+                if (self.areCellsWinnerReady(c4, c5)) {
+                    availableWins.push(self.cells[3]);
+                } else {
+                    availableBlocks.push(self.cells[3]);
+                }
             }
             if (availableCells.includes(self.cells[6]) && self.areCellsRipe(c7, c8)) {
-                availableMoves.push(self.cells[6]);
+                if (self.areCellsWinnerReady(c7, c8)) {
+                    availableWins.push(self.cells[6]);
+                } else {
+                    availableBlocks.push(self.cells[6]);
+                }
             }
 
             // vertical checks
             if (availableCells.includes(self.cells[6]) && self.areCellsRipe(c0, c3)) {
-                availableMoves.push(self.cells[6]);
+                if (self.areCellsWinnerReady(c0, c3)) {
+                    availableWins.push(self.cells[6]);
+                } else {
+                    availableBlocks.push(self.cells[6]);
+                }
             }
             if (availableCells.includes(self.cells[7]) && self.areCellsRipe(c1, c4)) {
-                availableMoves.push(self.cells[7]);
+                if (self.areCellsWinnerReady(c1, c4)) {
+                    availableWins.push(self.cells[7]);
+                } else {
+                    availableBlocks.push(self.cells[7]);
+                }
             }
             if (availableCells.includes(self.cells[8]) && self.areCellsRipe(c2, c5)) {
-                availableMoves.push(self.cells[8]);
+                if (self.areCellsWinnerReady(c2, c5)) {
+                    availableWins.push(self.cells[8]);
+                } else {
+                    availableBlocks.push(self.cells[8]);
+                }
             }
             if (availableCells.includes(self.cells[3]) && self.areCellsRipe(c0, c6)) {
-                availableMoves.push(self.cells[3]);
+                if (self.areCellsWinnerReady(c0, c6)) {
+                    availableWins.push(self.cells[3]);
+                } else {
+                    availableBlocks.push(self.cells[3]);
+                }
             }
             if (availableCells.includes(self.cells[4]) && self.areCellsRipe(c1, c7)) {
-                availableMoves.push(self.cells[4]);
+                if (self.areCellsWinnerReady(c1, c7)) {
+                    availableWins.push(self.cells[4]);
+                } else {
+                    availableBlocks.push(self.cells[4]);
+                }
             }
             if (availableCells.includes(self.cells[5]) && self.areCellsRipe(c2, c8)) {
-                availableMoves.push(self.cells[5]);
+                if (self.areCellsWinnerReady(c2, c8)) {
+                    availableWins.push(self.cells[5]);
+                } else {
+                    availableBlocks.push(self.cells[5]);
+                }
             }
             if (availableCells.includes(self.cells[0]) && self.areCellsRipe(c3, c6)) {
-                availableMoves.push(self.cells[0]);
+                if (self.areCellsWinnerReady(c3, c6)) {
+                    availableWins.push(self.cells[0]);
+                } else {
+                    availableBlocks.push(self.cells[0]);
+                }
             }
             if (availableCells.includes(self.cells[1]) && self.areCellsRipe(c4, c7)) {
-                availableMoves.push(self.cells[1]);
+                if (self.areCellsWinnerReady(c4, c7)) {
+                    availableWins.push(self.cells[1]);
+                } else {
+                    availableBlocks.push(self.cells[1]);
+                }
             }
             if (availableCells.includes(self.cells[2]) && self.areCellsRipe(c5, c8)) {
-                availableMoves.push(self.cells[2]);
+                if (self.areCellsWinnerReady(c5, c8)) {
+                    availableWins.push(self.cells[2]);
+                } else {
+                    availableBlocks.push(self.cells[2]);
+                }
             }
 
             // cross checks
             if (availableCells.includes(self.cells[8]) && self.areCellsRipe(c0, c4)) {
-                availableMoves.push(self.cells[8]);
+                if (self.areCellsWinnerReady(c0, c4)) {
+                    availableWins.push(self.cells[8]);
+                } else {
+                    availableBlocks.push(self.cells[8]);
+                }
             }
             if (availableCells.includes(self.cells[4]) && self.areCellsRipe(c0, c8)) {
-                availableMoves.push(self.cells[4]);
+                if (self.areCellsWinnerReady(c0, c8)) {
+                    availableWins.push(self.cells[4]);
+                } else {
+                    availableBlocks.push(self.cells[4]);
+                }
             }
             if (availableCells.includes(self.cells[0]) && self.areCellsRipe(c4, c8)) {
-                availableMoves.push(self.cells[0]);
+                if (self.areCellsWinnerReady(c4, c8)) {
+                    availableWins.push(self.cells[0]);
+                } else {
+                    availableBlocks.push(self.cells[0]);
+                }
             }
             if (availableCells.includes(self.cells[6]) && self.areCellsRipe(c2, c4)) {
-                availableMoves.push(self.cells[6]);
+                if (self.areCellsWinnerReady(c2, c4)) {
+                    availableWins.push(self.cells[6]);
+                } else {
+                    availableBlocks.push(self.cells[6]);
+                }
             }
             if (availableCells.includes(self.cells[4]) && self.areCellsRipe(c2, c6)) {
-                availableMoves.push(self.cells[4]);
+                if (self.areCellsWinnerReady(c2, c6)) {
+                    availableWins.push(self.cells[4]);
+                } else {
+                    availableBlocks.push(self.cells[4]);
+                }
             }
             if (availableCells.includes(self.cells[2]) && self.areCellsRipe(c4, c6)) {
-                availableMoves.push(self.cells[2]);
+                if (self.areCellsWinnerReady(c4, c6)) {
+                    availableWins.push(self.cells[2]);
+                } else {
+                    availableBlocks.push(self.cells[2]);
+                }
             }
 
-            if (availableMoves.length > 0) {
-                self.shuffle(availableMoves);
-                self.handleSelection(availableMoves[0]);
+            if (availableWins.length > 0) {
+                self.shuffle(availableWins);
+                self.handleSelection(availableWins[0]);
+            } else if (availableBlocks.length > 0) {
+                self.shuffle(availableBlocks);
+                self.handleSelection(availableBlocks[0]);
             } else {
                 self.shuffle(availableCells);
                 self.handleSelection(availableCells[0]);
