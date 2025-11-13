@@ -35,6 +35,7 @@ class TicTacToe {
         self.isXCPU = self.xDropdown.value === "cpu";
         self.isOCPU = self.oDropdown.value === "cpu";
         self.blockUI = self.isXCPU === true;
+        self.isXTurnAtStart = null; // set in clearCells()
         self.isXTurn = true;
         self.setCount(self.xCount, 0);
         self.setCount(self.tieCount, 0);
@@ -81,7 +82,14 @@ class TicTacToe {
 
     clearCells() {
         const self = TicTacToe.instance;
-        self.handleTurnMsg();
+        self.blockUI = false;
+        if (self.isXTurnAtStart === null) {
+            self.isXTurnAtStart = true;
+        } else {
+            self.isXTurnAtStart = !self.isXTurnAtStart;
+        }
+        self.isXTurn = self.isXTurnAtStart;
+        self.handleTurnMsg(self.isXTurnAtStart);
         self.cells.forEach((cell) => {
             cell.classList.remove("x");
             cell.classList.remove("o");
@@ -129,12 +137,13 @@ class TicTacToe {
         } else {
             selection.classList.add("o");
         }
-        self.isXTurn = !self.isXTurn;
         self.processGame();
+        self.isXTurn = !self.isXTurn;
     }
 
     processGame() {
         this.blockUI = true;
+        const isNextTurnX = !this.isXTurn;
 
         const c0 = Array.from(this.cells[0].classList);
         const c1 = Array.from(this.cells[1].classList);
@@ -203,7 +212,7 @@ class TicTacToe {
                 this.setCount(this.oCount, this.getCount(this.oCount) + 1);
                 this.setInfoMsg("O Wins!");
             }
-            if ((this.isXTurn === true && this.isXCPU === true) || (this.isXTurn === false && this.isOCPU === true)) {
+            if (true || (isNextTurnX === true && this.isXCPU === true) || (isNextTurnX === false && this.isOCPU === true)) {
                 this.timerInterval = setTimeout(this.clearCells, 1111);
                 return;
             }
@@ -222,13 +231,13 @@ class TicTacToe {
             ) {
                 this.setCount(this.tieCount, this.getCount(this.tieCount) + 1);
                 this.setInfoMsg("Tie!");
-                if ((this.isXTurn === true && this.isXCPU === true) || (this.isXTurn === false && this.isOCPU === true)) {
+                if (true || (isNextTurnX === true && this.isXCPU === true) || (isNextTurnX === false && this.isOCPU === true)) {
                     this.timerInterval = setTimeout(this.clearCells, 1111);
                     return;
                 }
             } else {
-                this.handleTurnMsg();
-                if (this.isXTurn === true) {
+                this.handleTurnMsg(isNextTurnX);
+                if (isNextTurnX === true) {
                     if (this.isXCPU === true) {
                         this.timerInterval = setTimeout(this.handleCPUTurn, 777);
                         return;
@@ -244,8 +253,8 @@ class TicTacToe {
         this.blockUI = false;
     }
 
-    handleTurnMsg() {
-        if (this.isXTurn === true) {
+    handleTurnMsg(paramIsXTurn) {
+        if (paramIsXTurn === true) {
             this.setInfoMsg("X it's your turn!");
         } else {
             this.setInfoMsg("O it's your turn!");
