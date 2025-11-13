@@ -7,6 +7,7 @@ body {
 .container {
     display: grid;
     height: 100vh;
+    width: 100vw;
     grid-template-rows: minmax(35px, 1fr) repeat(3, minmax(100px, 4fr)) minmax(35px, 1fr);
     grid-template-columns: repeat(3, minmax(200px, 1fr));
 }
@@ -14,6 +15,10 @@ body {
 .header-left, .header-middle, .header-right, .footer-left, .footer-middle, .footer-right {
     margin: auto;
     font-weight: bold;
+}
+
+select {
+    cursor: pointer;
 }
 
 .cell0 {
