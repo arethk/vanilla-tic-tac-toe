@@ -15,7 +15,8 @@ class TicTacToe {
         this.oCount = document.querySelector("#ocount");
         this.soundX = document.querySelector("#soundX");
         this.soundO = document.querySelector("#soundO");
-        this.soundWin = document.querySelector("#soundWin");
+        this.soundXWins = document.querySelector("#soundXWins");
+        this.soundOWins = document.querySelector("#soundOWins");
         this.soundTie = document.querySelector("#soundTie");
         this.timerInterval = null;
         this.cells = [];
@@ -353,16 +354,22 @@ class TicTacToe {
         this.soundO.play();
     }
 
-    playWinSound() {
+    playXWinsSound() {
         setTimeout(() => {
-            this.soundWin.play();
-        }, 300);
+            this.soundXWins.play();
+        }, 200);
+    }
+
+    playOWinsSound() {
+        setTimeout(() => {
+            this.soundOWins.play();
+        }, 200);
     }
 
     playTieSound() {
         setTimeout(() => {
             this.soundTie.play();
-        }, 300);
+        }, 200);
     }
 
     handleSelection(selection) {
@@ -436,7 +443,11 @@ class TicTacToe {
         });
 
         if (winner) {
-            this.playWinSound();
+            if (winner === "x") {
+                this.playXWinsSound();
+            } else {
+                this.playOWinsSound();
+            }
             this.cells.forEach((cell) => {
                 if (winners.includes(cell) === false) {
                     cell.classList.add("dim");
