@@ -13,6 +13,10 @@ class TicTacToe {
         this.xCount = document.querySelector("#xcount");
         this.tieCount = document.querySelector("#tiecount");
         this.oCount = document.querySelector("#ocount");
+        this.soundX = document.querySelector("#soundX");
+        this.soundO = document.querySelector("#soundO");
+        this.soundWin = document.querySelector("#soundWin");
+        this.soundTie = document.querySelector("#soundTie");
         this.timerInterval = null;
         this.cells = [];
 
@@ -341,11 +345,33 @@ class TicTacToe {
         self.handleSelection(event.target);
     }
 
+    playXSound() {
+        this.soundX.play();
+    }
+
+    playOSound() {
+        this.soundO.play();
+    }
+
+    playWinSound() {
+        setTimeout(() => {
+            this.soundWin.play();
+        }, 300);
+    }
+
+    playTieSound() {
+        setTimeout(() => {
+            this.soundTie.play();
+        }, 300);
+    }
+
     handleSelection(selection) {
         const self = TicTacToe.instance;
         if (self.isXTurn === true) {
+            self.playXSound();
             selection.classList.add("x");
         } else {
+            self.playOSound();
             selection.classList.add("o");
         }
         self.processGame();
@@ -410,6 +436,7 @@ class TicTacToe {
         });
 
         if (winner) {
+            this.playWinSound();
             this.cells.forEach((cell) => {
                 if (winners.includes(cell) === false) {
                     cell.classList.add("dim");
@@ -423,10 +450,8 @@ class TicTacToe {
                 this.setCount(this.oCount, this.getCount(this.oCount) + 1);
                 this.setInfoMsg("O Wins!");
             }
-            if (true || (isNextTurnX === true && this.isXCPU === true) || (isNextTurnX === false && this.isOCPU === true)) {
-                this.timerInterval = setTimeout(this.clearCells, 1111);
-                return;
-            }
+            this.timerInterval = setTimeout(this.clearCells, 1111);
+            return;
         } else {
             // handle tie
             if (
@@ -440,12 +465,11 @@ class TicTacToe {
                 c7.length == 2 &&
                 c8.length == 2
             ) {
+                this.playTieSound();
                 this.setCount(this.tieCount, this.getCount(this.tieCount) + 1);
                 this.setInfoMsg("Tie!");
-                if (true || (isNextTurnX === true && this.isXCPU === true) || (isNextTurnX === false && this.isOCPU === true)) {
-                    this.timerInterval = setTimeout(this.clearCells, 1111);
-                    return;
-                }
+                this.timerInterval = setTimeout(this.clearCells, 1111);
+                return;
             } else {
                 this.handleTurnMsg(isNextTurnX);
                 const isAllCpuPlayers = this.isXCPU === true && this.isOCPU === true;
@@ -492,6 +516,9 @@ class TicTacToe {
         this.cells.forEach((cell) => {
             cell.removeEventListener("click", this.handleCellClick);
         });
+        if (this.timerInterval) {
+            clearTimeout(this.timerInterval);
+        }
     }
 }
 

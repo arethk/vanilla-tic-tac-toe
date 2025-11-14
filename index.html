@@ -11,7 +11,7 @@
         <div class="header-left">
             <label for="xplayerdd">X Player</label>
             <select id="xplayerdd">
-                <option value="human">Human</option>
+                <option value="human" selected="">Human</option>
                 <option value="cpu">CPU</option>
             </select>
         </div>
@@ -20,7 +20,7 @@
             <label for="oplayerdd">O Player</label>
             <select id="oplayerdd">
                 <option value="human">Human</option>
-                <option value="cpu">CPU</option>
+                <option value="cpu" selected="">CPU</option>
             </select>
         </div>
         <div class="cell0"></div>
@@ -42,6 +42,11 @@
             O Wins: <span id="ocount"></span>
         </div>
     </div>
+    <audio src="x.mp3"></audio>
+    <audio id="soundX" preload="auto"><source src="x.mp3" type="audio/mpeg"></audio>
+    <audio id="soundO" preload="auto"><source src="o.mp3" type="audio/mpeg"></audio>
+    <audio id="soundWin" preload="auto"><source src="win.mp3" type="audio/mpeg"></audio>
+    <audio id="soundTie" preload="auto"><source src="tie.mp3" type="audio/mpeg"></audio>
     <script src="script.js"></script>
 </body>
 </html>
