@@ -45,10 +45,11 @@ class TicTacToe {
         self.setCount(self.xCount, 0);
         self.setCount(self.tieCount, 0);
         self.setCount(self.oCount, 0);
+        // TODO; add sounds here
         self.clearCells();
     }
 
-    areCellsRipe(cellA, cellB) {
+    areCellsSameValue(cellA, cellB) {
         if (Array.isArray(cellA) === false || Array.isArray(cellB) === false) {
             throw "Argument must be an array";
         }
@@ -94,63 +95,63 @@ class TicTacToe {
             const c7 = Array.from(self.cells[7].classList);
             const c8 = Array.from(self.cells[8].classList);
             // horizontal checks
-            if (availableCells.includes(self.cells[2]) && self.areCellsRipe(c0, c1)) {
+            if (availableCells.includes(self.cells[2]) && self.areCellsSameValue(c0, c1)) {
                 if (self.areCellsWinnerReady(c0, c1)) {
                     availableWins.push(self.cells[2]);
                 } else {
                     availableBlocks.push(self.cells[2]);
                 }
             }
-            if (availableCells.includes(self.cells[5]) && self.areCellsRipe(c3, c4)) {
+            if (availableCells.includes(self.cells[5]) && self.areCellsSameValue(c3, c4)) {
                 if (self.areCellsWinnerReady(c3, c4)) {
                     availableWins.push(self.cells[5]);
                 } else {
                     availableBlocks.push(self.cells[5]);
                 }
             }
-            if (availableCells.includes(self.cells[8]) && self.areCellsRipe(c6, c7)) {
+            if (availableCells.includes(self.cells[8]) && self.areCellsSameValue(c6, c7)) {
                 if (self.areCellsWinnerReady(c6, c7)) {
                     availableWins.push(self.cells[8]);
                 } else {
                     availableBlocks.push(self.cells[8]);
                 }
             }
-            if (availableCells.includes(self.cells[1]) && self.areCellsRipe(c0, c2)) {
+            if (availableCells.includes(self.cells[1]) && self.areCellsSameValue(c0, c2)) {
                 if (self.areCellsWinnerReady(c0, c2)) {
                     availableWins.push(self.cells[1]);
                 } else {
                     availableBlocks.push(self.cells[1]);
                 }
             }
-            if (availableCells.includes(self.cells[4]) && self.areCellsRipe(c3, c5)) {
+            if (availableCells.includes(self.cells[4]) && self.areCellsSameValue(c3, c5)) {
                 if (self.areCellsWinnerReady(c3, c5)) {
                     availableWins.push(self.cells[4]);
                 } else {
                     availableBlocks.push(self.cells[4]);
                 }
             }
-            if (availableCells.includes(self.cells[7]) && self.areCellsRipe(c6, c8)) {
+            if (availableCells.includes(self.cells[7]) && self.areCellsSameValue(c6, c8)) {
                 if (self.areCellsWinnerReady(c6, c8)) {
                     availableWins.push(self.cells[7]);
                 } else {
                     availableBlocks.push(self.cells[7]);
                 }
             }
-            if (availableCells.includes(self.cells[0]) && self.areCellsRipe(c1, c2)) {
+            if (availableCells.includes(self.cells[0]) && self.areCellsSameValue(c1, c2)) {
                 if (self.areCellsWinnerReady(c1, c2)) {
                     availableWins.push(self.cells[0]);
                 } else {
                     availableBlocks.push(self.cells[0]);
                 }
             }
-            if (availableCells.includes(self.cells[3]) && self.areCellsRipe(c4, c5)) {
+            if (availableCells.includes(self.cells[3]) && self.areCellsSameValue(c4, c5)) {
                 if (self.areCellsWinnerReady(c4, c5)) {
                     availableWins.push(self.cells[3]);
                 } else {
                     availableBlocks.push(self.cells[3]);
                 }
             }
-            if (availableCells.includes(self.cells[6]) && self.areCellsRipe(c7, c8)) {
+            if (availableCells.includes(self.cells[6]) && self.areCellsSameValue(c7, c8)) {
                 if (self.areCellsWinnerReady(c7, c8)) {
                     availableWins.push(self.cells[6]);
                 } else {
@@ -159,63 +160,63 @@ class TicTacToe {
             }
 
             // vertical checks
-            if (availableCells.includes(self.cells[6]) && self.areCellsRipe(c0, c3)) {
+            if (availableCells.includes(self.cells[6]) && self.areCellsSameValue(c0, c3)) {
                 if (self.areCellsWinnerReady(c0, c3)) {
                     availableWins.push(self.cells[6]);
                 } else {
                     availableBlocks.push(self.cells[6]);
                 }
             }
-            if (availableCells.includes(self.cells[7]) && self.areCellsRipe(c1, c4)) {
+            if (availableCells.includes(self.cells[7]) && self.areCellsSameValue(c1, c4)) {
                 if (self.areCellsWinnerReady(c1, c4)) {
                     availableWins.push(self.cells[7]);
                 } else {
                     availableBlocks.push(self.cells[7]);
                 }
             }
-            if (availableCells.includes(self.cells[8]) && self.areCellsRipe(c2, c5)) {
+            if (availableCells.includes(self.cells[8]) && self.areCellsSameValue(c2, c5)) {
                 if (self.areCellsWinnerReady(c2, c5)) {
                     availableWins.push(self.cells[8]);
                 } else {
                     availableBlocks.push(self.cells[8]);
                 }
             }
-            if (availableCells.includes(self.cells[3]) && self.areCellsRipe(c0, c6)) {
+            if (availableCells.includes(self.cells[3]) && self.areCellsSameValue(c0, c6)) {
                 if (self.areCellsWinnerReady(c0, c6)) {
                     availableWins.push(self.cells[3]);
                 } else {
                     availableBlocks.push(self.cells[3]);
                 }
             }
-            if (availableCells.includes(self.cells[4]) && self.areCellsRipe(c1, c7)) {
+            if (availableCells.includes(self.cells[4]) && self.areCellsSameValue(c1, c7)) {
                 if (self.areCellsWinnerReady(c1, c7)) {
                     availableWins.push(self.cells[4]);
                 } else {
                     availableBlocks.push(self.cells[4]);
                 }
             }
-            if (availableCells.includes(self.cells[5]) && self.areCellsRipe(c2, c8)) {
+            if (availableCells.includes(self.cells[5]) && self.areCellsSameValue(c2, c8)) {
                 if (self.areCellsWinnerReady(c2, c8)) {
                     availableWins.push(self.cells[5]);
                 } else {
                     availableBlocks.push(self.cells[5]);
                 }
             }
-            if (availableCells.includes(self.cells[0]) && self.areCellsRipe(c3, c6)) {
+            if (availableCells.includes(self.cells[0]) && self.areCellsSameValue(c3, c6)) {
                 if (self.areCellsWinnerReady(c3, c6)) {
                     availableWins.push(self.cells[0]);
                 } else {
                     availableBlocks.push(self.cells[0]);
                 }
             }
-            if (availableCells.includes(self.cells[1]) && self.areCellsRipe(c4, c7)) {
+            if (availableCells.includes(self.cells[1]) && self.areCellsSameValue(c4, c7)) {
                 if (self.areCellsWinnerReady(c4, c7)) {
                     availableWins.push(self.cells[1]);
                 } else {
                     availableBlocks.push(self.cells[1]);
                 }
             }
-            if (availableCells.includes(self.cells[2]) && self.areCellsRipe(c5, c8)) {
+            if (availableCells.includes(self.cells[2]) && self.areCellsSameValue(c5, c8)) {
                 if (self.areCellsWinnerReady(c5, c8)) {
                     availableWins.push(self.cells[2]);
                 } else {
@@ -224,42 +225,42 @@ class TicTacToe {
             }
 
             // cross checks
-            if (availableCells.includes(self.cells[8]) && self.areCellsRipe(c0, c4)) {
+            if (availableCells.includes(self.cells[8]) && self.areCellsSameValue(c0, c4)) {
                 if (self.areCellsWinnerReady(c0, c4)) {
                     availableWins.push(self.cells[8]);
                 } else {
                     availableBlocks.push(self.cells[8]);
                 }
             }
-            if (availableCells.includes(self.cells[4]) && self.areCellsRipe(c0, c8)) {
+            if (availableCells.includes(self.cells[4]) && self.areCellsSameValue(c0, c8)) {
                 if (self.areCellsWinnerReady(c0, c8)) {
                     availableWins.push(self.cells[4]);
                 } else {
                     availableBlocks.push(self.cells[4]);
                 }
             }
-            if (availableCells.includes(self.cells[0]) && self.areCellsRipe(c4, c8)) {
+            if (availableCells.includes(self.cells[0]) && self.areCellsSameValue(c4, c8)) {
                 if (self.areCellsWinnerReady(c4, c8)) {
                     availableWins.push(self.cells[0]);
                 } else {
                     availableBlocks.push(self.cells[0]);
                 }
             }
-            if (availableCells.includes(self.cells[6]) && self.areCellsRipe(c2, c4)) {
+            if (availableCells.includes(self.cells[6]) && self.areCellsSameValue(c2, c4)) {
                 if (self.areCellsWinnerReady(c2, c4)) {
                     availableWins.push(self.cells[6]);
                 } else {
                     availableBlocks.push(self.cells[6]);
                 }
             }
-            if (availableCells.includes(self.cells[4]) && self.areCellsRipe(c2, c6)) {
+            if (availableCells.includes(self.cells[4]) && self.areCellsSameValue(c2, c6)) {
                 if (self.areCellsWinnerReady(c2, c6)) {
                     availableWins.push(self.cells[4]);
                 } else {
                     availableBlocks.push(self.cells[4]);
                 }
             }
-            if (availableCells.includes(self.cells[2]) && self.areCellsRipe(c4, c6)) {
+            if (availableCells.includes(self.cells[2]) && self.areCellsSameValue(c4, c6)) {
                 if (self.areCellsWinnerReady(c4, c6)) {
                     availableWins.push(self.cells[2]);
                 } else {
@@ -323,7 +324,7 @@ class TicTacToe {
             const classes = Array.from(cell.classList);
             if (classes.includes("dim")) {
                 return true;
-            } else if (classes.includes("x") || classes.includes("o")) {
+            } else if (this.isCellTaken(classes)) {
                 ++cellClickedCount;
             }
         }
@@ -340,35 +341,45 @@ class TicTacToe {
             return;
         }
         const classes = Array.from(event.target.classList);
-        if (classes.includes("x") || classes.includes("o")) {
+        if (self.isCellTaken(classes)) {
             return;
         }
         self.handleSelection(event.target);
     }
 
     playXSound() {
-        this.soundX.play();
+        this.soundX.play().catch(error => {
+            //console.log('Playback failed:', error);
+        });
     }
 
     playOSound() {
-        this.soundO.play();
+        this.soundO.play().catch(error => {
+            //console.log('Playback failed:', error);
+        });
     }
 
     playXWinsSound() {
         setTimeout(() => {
-            this.soundXWins.play();
+            this.soundXWins.play().catch(error => {
+                //console.log('Playback failed:', error);
+            });
         }, 200);
     }
 
     playOWinsSound() {
         setTimeout(() => {
-            this.soundOWins.play();
+            this.soundOWins.play().catch(error => {
+                //console.log('Playback failed:', error);
+            });
         }, 200);
     }
 
     playTieSound() {
         setTimeout(() => {
-            this.soundTie.play();
+            this.soundTie.play().catch(error => {
+                //console.log('Playback failed:', error);
+            });
         }, 200);
     }
 
@@ -403,35 +414,35 @@ class TicTacToe {
         let winner = null;
 
         ["x", "o"].some((player) => {
-            if (c0.includes(player) && c1.includes(player) && c2.includes(player)) {
+            if (this.areCellsTakenByPlayer(c0, c1, c2, player)) {
                 winners.push(this.cells[0]);
                 winners.push(this.cells[1]);
                 winners.push(this.cells[2]);
-            } else if (c3.includes(player) && c4.includes(player) && c5.includes(player)) {
+            } else if (this.areCellsTakenByPlayer(c3, c4, c5, player)) {
                 winners.push(this.cells[3]);
                 winners.push(this.cells[4]);
                 winners.push(this.cells[5]);
-            } else if (c6.includes(player) && c7.includes(player) && c8.includes(player)) {
+            } else if (this.areCellsTakenByPlayer(c6, c7, c8, player)) {
                 winners.push(this.cells[6]);
                 winners.push(this.cells[7]);
                 winners.push(this.cells[8]);
-            } else if (c0.includes(player) && c3.includes(player) && c6.includes(player)) {
+            } else if (this.areCellsTakenByPlayer(c0, c3, c6, player)) {
                 winners.push(this.cells[0]);
                 winners.push(this.cells[3]);
                 winners.push(this.cells[6]);
-            } else if (c1.includes(player) && c4.includes(player) && c7.includes(player)) {
+            } else if (this.areCellsTakenByPlayer(c1, c4, c7, player)) {
                 winners.push(this.cells[1]);
                 winners.push(this.cells[4]);
                 winners.push(this.cells[7]);
-            } else if (c2.includes(player) && c5.includes(player) && c8.includes(player)) {
+            } else if (this.areCellsTakenByPlayer(c2, c5, c8, player)) {
                 winners.push(this.cells[2]);
                 winners.push(this.cells[5]);
                 winners.push(this.cells[8]);
-            } else if (c0.includes(player) && c4.includes(player) && c8.includes(player)) {
+            } else if (this.areCellsTakenByPlayer(c0, c4, c8, player)) {
                 winners.push(this.cells[0]);
                 winners.push(this.cells[4]);
                 winners.push(this.cells[8]);
-            } else if (c2.includes(player) && c4.includes(player) && c6.includes(player)) {
+            } else if (this.areCellsTakenByPlayer(c2, c4, c6, player)) {
                 winners.push(this.cells[2]);
                 winners.push(this.cells[4]);
                 winners.push(this.cells[6]);
@@ -466,15 +477,15 @@ class TicTacToe {
         } else {
             // handle tie
             if (
-                c0.length == 2 &&
-                c1.length == 2 &&
-                c2.length == 2 &&
-                c3.length == 2 &&
-                c4.length == 2 &&
-                c5.length == 2 &&
-                c6.length == 2 &&
-                c7.length == 2 &&
-                c8.length == 2
+                this.isCellTaken(c0) &&
+                this.isCellTaken(c1) &&
+                this.isCellTaken(c2) &&
+                this.isCellTaken(c3) &&
+                this.isCellTaken(c4) &&
+                this.isCellTaken(c5) &&
+                this.isCellTaken(c6) &&
+                this.isCellTaken(c7) &&
+                this.isCellTaken(c8)
             ) {
                 this.playTieSound();
                 this.setCount(this.tieCount, this.getCount(this.tieCount) + 1);
@@ -499,6 +510,20 @@ class TicTacToe {
             }
         }
         this.blockUI = false;
+    }
+
+    areCellsTakenByPlayer(cell1, cell2, cell3, player) {
+        if (Array.isArray(cell1) === false || Array.isArray(cell2) === false || Array.isArray(cell3) === false) {
+            throw "Argument must be an array";
+        }
+        return cell1.includes(player) && cell2.includes(player) && cell3.includes(player)
+    }
+
+    isCellTaken(cell) {
+        if (Array.isArray(cell) === false) {
+            throw "Argument must be an array";
+        }
+        return cell.includes("x") || cell.includes("o");
     }
 
     handleTurnMsg(paramIsXTurn) {
@@ -533,8 +558,8 @@ class TicTacToe {
     }
 }
 
+const ttt = new TicTacToe();
+
 window.onbeforeunload = function () {
     ttt.destroy();
 }
-
-const ttt = new TicTacToe();
