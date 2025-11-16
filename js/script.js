@@ -18,6 +18,10 @@ class TicTacToe {
         this.soundXWins = document.querySelector("#soundXWins");
         this.soundOWins = document.querySelector("#soundOWins");
         this.soundTie = document.querySelector("#soundTie");
+        this.soundHumanVsHuman = document.querySelector("#soundHumanVsHuman");
+        this.soundHumanVsAI = document.querySelector("#soundHumanVsAI");
+        this.soundAIVsHuman = document.querySelector("#soundAIVsHuman");
+        this.soundAIVsAI = document.querySelector("#soundAIVsAI");
         this.timerInterval = null;
         this.cells = [];
 
@@ -45,7 +49,15 @@ class TicTacToe {
         self.setCount(self.xCount, 0);
         self.setCount(self.tieCount, 0);
         self.setCount(self.oCount, 0);
-        // TODO; add sounds here
+        if (self.isXAI === true && self.isOAI === true) {
+            self.playAIVsAISound();
+        } else if (self.isXAI === true && self.isOAI === false) {
+            self.playAIVsHumanSound();
+        } else if (self.isXAI === false && self.isOAI === true) {
+            self.playHumanVsAISound();
+        } else if (self.isXAI === false && self.isOAI === false) {
+            self.playHumanVsHumanSound();
+        }
         self.clearCells();
     }
 
@@ -345,6 +357,30 @@ class TicTacToe {
             return;
         }
         self.handleSelection(event.target);
+    }
+
+    playHumanVsHumanSound() {
+        this.soundHumanVsHuman.play().catch(error => {
+            //console.log('Playback failed:', error);
+        });
+    }
+
+    playHumanVsAISound() {
+        this.soundHumanVsAI.play().catch(error => {
+            //console.log('Playback failed:', error);
+        });
+    }
+
+    playAIVsHumanSound() {
+        this.soundAIVsHuman.play().catch(error => {
+            //console.log('Playback failed:', error);
+        });
+    }
+
+    playAIVsAISound() {
+        this.soundAIVsAI.play().catch(error => {
+            //console.log('Playback failed:', error);
+        });
     }
 
     playXSound() {
