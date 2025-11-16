@@ -37,9 +37,9 @@ class TicTacToe {
         if (self.timerInterval) {
             clearTimeout(self.timerInterval);
         }
-        self.isXCPU = self.xDropdown.value === "cpu";
-        self.isOCPU = self.oDropdown.value === "cpu";
-        self.blockUI = self.isXCPU === true;
+        self.isXAI = self.xDropdown.value === "ai";
+        self.isOAI = self.oDropdown.value === "ai";
+        self.blockUI = self.isXAI === true;
         self.isXTurnAtStart = null; // set in clearCells()
         self.isXTurn = true;
         self.setCount(self.xCount, 0);
@@ -312,7 +312,7 @@ class TicTacToe {
             cell.classList.remove("o");
             cell.classList.remove("dim");
         });
-        if ((self.isXTurn === true && self.isXCPU === true) || (self.isXTurn === false && self.isOCPU === true)) {
+        if ((self.isXTurn === true && self.isXAI === true) || (self.isXTurn === false && self.isOAI === true)) {
             self.handleCPUTurn();
         }
     }
@@ -494,15 +494,15 @@ class TicTacToe {
                 return;
             } else {
                 this.handleTurnMsg(isNextTurnX);
-                const isAllCpuPlayers = this.isXCPU === true && this.isOCPU === true;
+                const isAllCpuPlayers = this.isXAI === true && this.isOAI === true;
                 const delay = isAllCpuPlayers === true ? 1111 : 777;
                 if (isNextTurnX === true) {
-                    if (this.isXCPU === true) {
+                    if (this.isXAI === true) {
                         this.timerInterval = setTimeout(this.handleCPUTurn, delay);
                         return;
                     }
                 } else {
-                    if (this.isOCPU === true) {
+                    if (this.isOAI === true) {
                         this.timerInterval = setTimeout(this.handleCPUTurn, delay);
                         return;
                     }
